@@ -1,4 +1,9 @@
 class PostsController < ApplicationController
+	http_basic_authenticate_with name: "admin", password: "admin", except: [:index, :show]
+	def index
+		@posts = Post.all
+	end
+
 	def new
 		@post = Post.new
 	end
@@ -38,10 +43,6 @@ class PostsController < ApplicationController
 	  @post.destroy
 	 
 	  redirect_to posts_path
-	end
-
-	def index
-		@posts = Post.all
 	end
 
 	private
